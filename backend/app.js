@@ -12,7 +12,7 @@ const mongoose =  require('mongoose');
 const bcrypt = require('bcryptjs');
 
 //grab our config file  
-//!!!!! NEED TO SET UP DATABASE FIRST this will be someines login details for mongo db 
+const config = require('./config.json');
 
 //Schemas 
 // every schema needs a capital letter
@@ -25,6 +25,18 @@ app.use(cors());
 
 //start our server 
 app.listen(port, () => {
-    console.log(`server is running on port ${port}`)
+    console.log(`server is running on port ${port}`);
+    
 })
 
+// connect to mongoDB cloud 
+mongoose.connect(
+    `mongodb+srv://${config.username}:${config.password}@cluster0.uc2us0c.mongodb.net/?retryWrites=true&w=majority`,
+    //.then is a chaining method used with promises 
+    //in simple terms, it will run something after the function before it 
+).then(() => {
+    console.log("you've connected to Mongo DB")
+    //.catch is a method to "catch" any errors
+}).catch((err) => {
+    console.log(`DB connection error ${err.message}`)
+})
