@@ -25,3 +25,4 @@ const projectSchema = new mongoose.Schema(
 // The second argument is the schema variable we declared above.
 
 module.exports = mongoose.model('Project', projectSchema);
+
