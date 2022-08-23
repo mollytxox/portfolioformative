@@ -40,3 +40,15 @@ mongoose.connect(
 }).catch((err) => {
     console.log(`DB connection error ${err.message}`)
 })
+
+
+//=====================================================
+//----------!!! GET METHOD !!!!-----------
+//=====================================================
+app.get('/allProjects',(req, res) => { 
+    Project.find()
+    .then(result => {
+        //send back the result of the search to the frontend 
+        res.send(result)
+    })
+});
