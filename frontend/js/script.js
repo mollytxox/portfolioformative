@@ -3,9 +3,6 @@ const result = document.getElementById("result");
 console.log("hi!");
 
 
-
-
-
 let showAllProjects = () => {
     $.ajax({
         type: 'GET', 
@@ -21,6 +18,7 @@ let showAllProjects = () => {
         }
     })
 }
+
 
 fillEditInputs = (project, id) => {
     let projectName = document.getElementById("projectName");
@@ -114,6 +112,7 @@ let collectEditButtons = () => {
     }
 };
 
+
 let renderProjects = (projects) => {
     console.log("the render projects function is working");
     result.innerHTML = "";
@@ -123,6 +122,7 @@ let renderProjects = (projects) => {
             <h3>${item.name}</h3>
             <img src="${item.img_url}">
             <h5>${item.author}</h5>
+
             <button ahref="${item.url}">View More</button>
 
             <i class="bi bi-trash3"></i>
@@ -131,8 +131,10 @@ let renderProjects = (projects) => {
         </div>
         `;
     });
+
     //collect edit buttons 
     collectEditButtons();
+
 };
 
 
