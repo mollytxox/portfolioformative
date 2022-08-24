@@ -52,3 +52,42 @@ app.get('/allProjects',(req, res) => {
         res.send(result)
     })
 });
+
+
+//=====================================================
+//----------!!! UPDATE/EDIT PROJECT METHOD !!!!-------
+//=====================================================
+app.patch('/updateProject/:id', (req, res) => {
+    const idParam = req.params.id;
+    Project.findById(idParam, (err, project) => {
+        const updatedProject = {
+            name: req.body.name,
+            author: req.body.author,
+            img_url: req.body.img_url,
+            url: req.body.url 
+        }
+        Project.updateOne({
+            _id: idParam
+        },updatedProject )
+        .then(result => {
+            res.send(result); 
+        })
+        .catch(err => res.send(err));
+    });
+
+});
+
+
+  //editing projectvia bootstrap madal 
+  //the :id is a special syntax that can grab the id from a variable in the frontend 
+  app.get('/project/:id', (req, res) => {
+    const projectId = req.params.id 
+    console.log(projectId)
+    Project.findById(projectId, (err, project) => {
+      if(err) {
+        console.log(err);
+      }else {
+        res.send(project);
+      }
+    })
+  })
