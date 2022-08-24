@@ -1,31 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio App</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- fonts  -->
-    <link rel="stylesheet" href="https://use.typekit.net/ibi7foo.css">
+  <title>Portfolio App</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="css/styles.css">
+  <!-- bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-  </head>
-  <body>
-    <nav>
-      <a>Home</a>
-    </nav>
-    <h1>Portfolio</h1>
-    
+  <!-- fonts  -->
+  <link rel="stylesheet" href="https://use.typekit.net/ibi7foo.css">
 
-    <div id="result">
+  <link rel="stylesheet" href="css/styles.css">
 
-    </div>
-  </body>
+</head>
+
+<body>
+  <nav>
+    <a>Home</a>
+  </nav>
+  <h1>Portfolio</h1>
+
+  <!-- Add Project Form  -->
+  <form id="add-coffee-form" action="javascript:void(0)">
+    <label for="name-input">Project Name: </label>
+    <input id="name-input" name="name-input" type="text">
+    <label for="author-input">Author: </label>
+    <input id="author-input" name="author-input" type="number">
+    <label for="image-url-input">Project Image URL</label>
+    <input id="image-url-input" name="image-url-input" type="text">
+    <label for="url-input">Project Link (URL):</label>
+    <input id="url-input" name="url-input" type="text">
+    <button id="coffee-button">Go</button>
+  </form>
+  </div>
+
+  <!-- Result Div  -->
+  <div id="result"></div>
+
+  <!-- jquery -->
+  <script src="https://kit.fontawesome.com/ab86417da5.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>
