@@ -7,19 +7,20 @@
 }
 
 body {
-  background: rgba(23, 21, 21, 0.933);
+  background: hsla(0, 5%, 9%, 1);
 }
 
 
 .nav-wrap {
   width: 100%;
   height: auto;
-  border-bottom: solid 2px rgb(246, 237, 235);
+  border-bottom: solid 2px hsl(11, 38%, 94%);
+  background-image: url('wave-lines.svg');
+  background-size: 100%;
 
   .nav-cont {
     width: 80%;
     margin: auto;
-    padding: 8px 0px 15px 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,43 +30,73 @@ body {
     #logo {
       // width: 188px;
       color: rgb(246, 237, 235);
-      font-size: 35px;
+      font-size: 27px;
       font-family: obviously, sans-serif;
       font-weight: 700;
       font-style: normal;
+      padding: 8px 28px 15px 28px;
+      border-left: solid 2px rgb(246, 236, 234);
+      border-right: solid 2px rgb(246, 236, 234);
+      background: hsla(0, 5%, 9%, 1);
     }
   }
 }
 
-#result {
+section {
   width: 100%;
+  height: 624px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  h1 {
+    color: rgb(246, 237, 235);
+    text-align: center;
+    font-size: 159px;
+    line-height: 133px;
+    text-transform: uppercase;
+    font-family: obviously, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+}
+
+#result {
+  width: 92%;
   margin: auto;
   display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(5, 1fr);
+  padding: 0 45px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   grid-template-rows: repeat(auto, auto);
 
   .folio-item-wrap {
-    grid-area: 1, 1;
-    aspect-ratio: 1/1.5;
-    background: rgb(246, 237, 235);
-    border-bottom: solid 2px rgb(255, 47, 0);
+    // grid-area: 1, 1;
+    // aspect-ratio: 1/1.5;
+    border: solid 2px rgb(246, 237, 235);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    // gap: 3px;
+    color: rgb(246, 237, 235);
 
     h3 {
       font-size: 24px;
+      width: 100%;
+      padding: 18px auto 8px auto;
+      // background: rgb(255, 57, 90);
+      text-align: center;
     }
 
     img {
       width: 100%;
-      height: 200px;
+      height: 320px;
+      border-top: solid 2px rgb(246, 237, 235);
+      border-bottom: solid 2px rgb(246, 237, 235);
       object-fit: cover;
+      background: rgb(246, 237, 235);
     }
-
-
   }
 }
