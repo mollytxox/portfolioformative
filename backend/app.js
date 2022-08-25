@@ -75,10 +75,10 @@ app.post(`/addProject`, (req, res) => {
         // give our new coffee the details we sent from the frontend 
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
-        image_url: req.body.image_url,
+        img_url: req.body.image_url,
         url: req.body.url
     });
-    // to save the newcoffee to the database
+    // to save the new portfolio to the database
     // use the variable declared above
     newProject.save()
         .then((result) => {
@@ -102,31 +102,66 @@ app.patch('/updateProject/:id', (req, res) => {
             name: req.body.name,
             author: req.body.author,
             img_url: req.body.img_url,
-            url: req.body.url 
+            url: req.body.url
         }
         Project.updateOne({
             _id: idParam
-        },updatedProject )
-        .then(result => {
-            res.send(result); 
-        })
-        .catch(err => res.send(err));
+        }, updatedProject)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(err => res.send(err));
     });
 
 });
 
 
-  //editing projectvia bootstrap madal 
-  //the :id is a special syntax that can grab the id from a variable in the frontend 
-  app.get('/project/:id', (req, res) => {
-    const projectId = req.params.id 
+//editing projectvia bootstrap madal 
+//the :id is a special syntax that can grab the id from a variable in the frontend 
+app.get('/project/:id', (req, res) => {
+    const projectId = req.params.id
     console.log(projectId)
     Project.findById(projectId, (err, project) => {
-      if(err) {
-        console.log(err);
-      }else {
-        res.send(project);
-      }
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(project);
+        }
     })
-  })
+})
 
+
+// =========================================
+//        !!!--- DELETE Method ---!!!
+// =========================================
+
+// set up the delete route
+// This route will only be actived if someone goes to it
+// you can go to it using AJAX
+app.delete('/deleteProject/:id', (req, res) => {
+    // the request varible here (req) contains the ID, and you can access it using req.param.id
+    const projectId = req.params.id;
+    console.log("The following project was deleted:")
+    console.log(projectId);
+    // findById() looks up a piece of data based on the id aurgument which we give it first
+    // we're giving it the project ID vairible
+    //  if it successful it will run a function
+    // then function will provide us the details on that project or an error if it doesn't work
+    Project.findById(projectId, (err, project) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(project);
+            Project.deleteOne({ _id: projectId })
+                .then(() => {
+                    console.log("Success! Actually deleted from mongoDB")
+                    // res.send will end the process
+                    res.send(project)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
+    });
+});
