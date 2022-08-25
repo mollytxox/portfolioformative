@@ -1,12 +1,20 @@
 
 const result = document.getElementById("result");
+const goBtn = document.getElementById("go-button");
+
+// declare all our inputs
+const authorInput = document.getElementById("author-input");
+const nameInput = document.getElementById("name-input");
+const imageURLInput = document.getElementById("image-url-input");
+const urlInput = document.getElementById("url-input");
+
 console.log("hi!");
 
 
 let showAllProjects = () => {
     $.ajax({
-        type: 'GET', 
-        url: "http://localhost:3200/allProjects",
+        type: 'GET',
+        url: "http://localhost:3200/allProject",
         //the success function contains an object which can be named anything 
         success: (projects) => {
             console.log(projects);
@@ -18,6 +26,32 @@ let showAllProjects = () => {
         }
     })
 }
+
+// ADDING THE GO BTN ONCLICK FOR ADDING IN NEW PROJECTS 
+goBtn.onclick = () => {
+    console.log("clicked");
+    $.ajax({
+        url: "http://localhost:3200/addProject",
+        // use the post type to create data somewhere
+        // requesting to POST our data
+        type: "POST",
+        // we can send objects through to the backend, using the data argument
+        data: {
+            // the first property (i.e. the one on the left) called name has to be spelt exactly as the schema
+            name: nameInput.value,
+            author: authorInput.value,
+            image_url: imageURLInput.value,
+            url: urlInput.value,
+        },
+        success: () => {
+            console.log("A new portfolio was added.");
+            showAllProjects();
+        },
+        error: () => {
+            console.log("Error: cannot reach the backend");
+        },
+    });
+};
 
 
 fillEditInputs = (project, id) => {
@@ -37,10 +71,10 @@ fillEditInputs = (project, id) => {
     <img src="${project.img_url}" alt="${projectName}">
     `;
 
-     //=================================
+    //=================================
     //      EDIT CLICK LISTENER
     //=================================
-    $('#updateProject').click(function(){
+    $('#updateProject').click(function () {
         event.preventDefault();
         let projectId = id;
         let projectName = document.getElementById("projectName").value;
@@ -64,7 +98,7 @@ fillEditInputs = (project, id) => {
                 console.log("Success - project was updated")
                 showAllProjects();
                 $("#updateProjects").off('click');
-                
+
             },
             error: () => {
                 console.log("Error no Updatey");
@@ -81,9 +115,9 @@ populateEditModal = (projectId) => {
         url: `http://localhost:3200/project/${projectId}`,
         type: 'GET',
         success: (projectData) => {
-           console.log("Project was found!")
-           console.log(projectData);
-           fillEditInputs(projectData, projectId);
+            console.log("Project was found!")
+            console.log(projectData);
+            fillEditInputs(projectData, projectId);
 
         },
         error: () => {
@@ -106,8 +140,8 @@ let collectEditButtons = () => {
             console.log("edit button clicked");
             let currentId = editButtonsArray[i].parentNode.id;
             //edit projects based on the id 
-           populateEditModal(currentId);
-           // showAllProjects();
+            populateEditModal(currentId);
+            // showAllProjects();
         };
     }
 };
@@ -118,14 +152,14 @@ let renderProjects = (projects) => {
     result.innerHTML = "";
     projects.forEach((item) => {
         result.innerHTML += `
-        <div class="product-wrapper" id="${item._id}">
+        <div class="folio-item-wrap" id="${item._id}">
             <h3>${item.name}</h3>
             <img src="${item.img_url}">
             <h5>${item.author}</h5>
 
             <button ahref="${item.url}">View More</button>
 
-            <i class="bi bi-trash3"></i>
+            <i class="bi bi-trash3 delete-button"></i>
             <i class="bi bi-pencil edit-button" data-bs-toggle="modal" data-bs-target="#editModal"></i>
             
         </div>
@@ -134,8 +168,43 @@ let renderProjects = (projects) => {
 
     //collect edit buttons 
     collectEditButtons();
+    collectDeleteButtons();
 
 };
 
+// DELETING PROJECTS ---------------------------------------------
+
+// this function gets run when we click on a delete button
+let deleteProject = (projectId) => {
+    // use ajax and go to the delete route
+    $.ajax({
+        // Let's go to our route
+        url: `http://localhost:3200/deleteProject/${projectId}`,
+        type: "DELETE",
+        success: () => {
+            // at this point, we can assume that the delete was successful
+            showAllProjects();
+        },
+        error: () => {
+            console.log("Cannot call API");
+        },
+    });
+};
+
+// this function will handle all our deletes
+let collectDeleteButtons = () => {
+    // this will return an Array, but it's a slightly different one
+    // it returns HTML "nodes" instead
+    // we'll have use a regular loop to loop over these
+    let deleteButtonsArray = document.getElementsByClassName("delete-button");
+    // this will loop over every delete button
+    for (let i = 0; i < deleteButtonsArray.length; i++) {
+        deleteButtonsArray[i].onclick = () => {
+            let currentId = deleteButtonsArray[i].parentNode.id;
+            // delete project based on the id
+            deleteProject(currentId);
+        };
+    }
+};
 
 showAllProjects();
