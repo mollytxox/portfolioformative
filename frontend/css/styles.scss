@@ -62,14 +62,32 @@ section {
   }
 }
 
+form {
+  width: 92%;
+  max-width: 92%;
+  margin: auto;
+  border: solid 2px rgb(246, 237, 235);
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(auto, auto);
+  gap: 20px;
+  color: rgb(246, 237, 235);
+}
+
 #result {
   width: 92%;
   margin: auto;
   display: grid;
-  padding: 0 45px;
+  position: relative;
+  // padding: 0 45px;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   grid-template-rows: repeat(auto, auto);
+
+
+
+  // border: solid 2px rgb(246, 237, 235);
 
   .folio-item-wrap {
     // grid-area: 1, 1;
@@ -78,25 +96,73 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    // justify-content: space-between;
     // gap: 3px;
     color: rgb(246, 237, 235);
+    gap: 0px;
 
     h3 {
-      font-size: 24px;
+      font-size: 38px;
       width: 100%;
-      padding: 18px auto 8px auto;
-      // background: rgb(255, 57, 90);
+      // margin-top: 5px;
+      margin-bottom: 0px;
+      color: rgb(246, 237, 235);
+      // background: rgb(246, 237, 235);
       text-align: center;
+      display: block;
+      padding: 5px;
     }
 
     img {
       width: 100%;
       height: 320px;
+      margin: 0;
       border-top: solid 2px rgb(246, 237, 235);
       border-bottom: solid 2px rgb(246, 237, 235);
       object-fit: cover;
       background: rgb(246, 237, 235);
     }
+
+    .author-cont {
+      width: 100%;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px 0px;
+      position: relative;
+
+
+      h5 {
+        text-align: center;
+        font-size: 26px;
+        margin-top: 3px;
+        margin-bottom: 6px;
+      }
+
+
+      button {
+        padding: 2px 5px;
+        border: solid 2px rgb(246, 237, 235);
+      }
+
+
+    }
+
+    .functions-cont {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      margin: 10px auto 15px;
+    }
   }
+}
+
+.modal {
+  --bs-modal-width: 900px;
+  --bs-modal-border-radius: 0;
+  --bs-modal-border-width: 2px;
+  --bs-modal-bg: hsla(0, 5%, 9%, 1);
+  --bs-modal-border-color: rgb(246, 237, 235);
 }
