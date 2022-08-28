@@ -116,7 +116,7 @@ app.patch('/updateProject/:id', (req, res) => {
 });
 
 
-//editing projectvia bootstrap madal 
+//editing project via bootstrap madal 
 //the :id is a special syntax that can grab the id from a variable in the frontend 
 app.get('/project/:id', (req, res) => {
     const projectId = req.params.id

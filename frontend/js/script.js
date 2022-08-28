@@ -138,7 +138,7 @@ let collectEditButtons = () => {
         editButtonsArray[i].onclick = () => {
             console.log(editButtonsArray[i].id);
             console.log("edit button clicked");
-            let currentId = editButtonsArray[i].parentNode.id;
+            let currentId = editButtonsArray[i].parentNode.parentNode.id;
             //edit projects based on the id 
             populateEditModal(currentId);
             // showAllProjects();
@@ -155,13 +155,15 @@ let renderProjects = (projects) => {
         <div class="folio-item-wrap" id="${item._id}">
             <h3>${item.name}</h3>
             <img src="${item.img_url}">
-            <h5>${item.author}</h5>
-
-            <button ahref="${item.url}">View More</button>
+            <div class="author-cont">
+                <h5>${item.author}</h5>
+                <button href="${item.url}">View More</button>
+            </div>
+            <div class="functions-cont">
 
             <i class="bi bi-trash3 delete-button"></i>
             <i class="bi bi-pencil edit-button" data-bs-toggle="modal" data-bs-target="#editModal"></i>
-            
+            </div>
         </div>
         `;
     });
@@ -200,7 +202,7 @@ let collectDeleteButtons = () => {
     // this will loop over every delete button
     for (let i = 0; i < deleteButtonsArray.length; i++) {
         deleteButtonsArray[i].onclick = () => {
-            let currentId = deleteButtonsArray[i].parentNode.id;
+            let currentId = deleteButtonsArray[i].parentNode.parentNode.id;
             // delete project based on the id
             deleteProject(currentId);
         };
